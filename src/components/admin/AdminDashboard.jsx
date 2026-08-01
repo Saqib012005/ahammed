@@ -38,15 +38,16 @@ export default function AdminDashboard({ onLogout }) {
               href="/"
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-1.5 rounded-lg border border-neutral-300 px-3 py-1.5 text-sm text-neutral-600 hover:bg-neutral-50"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-neutral-300 px-3 py-1.5 text-sm text-neutral-600 hover:bg-neutral-50 cursor-pointer transition-colors"
             >
               <ExternalLink className="w-4 h-4" /> View site
             </a>
             <button
               type="button"
               onClick={onLogout}
-              className="inline-flex items-center gap-1.5 rounded-lg border border-neutral-300 px-3 py-1.5 text-sm text-neutral-600 hover:bg-neutral-50"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-neutral-300 px-3 py-1.5 text-sm text-neutral-600 hover:bg-neutral-50 cursor-pointer transition-colors"
             >
+
               <LogOut className="w-4 h-4" /> Logout
             </button>
           </div>
@@ -65,11 +66,12 @@ export default function AdminDashboard({ onLogout }) {
                   <button
                     type="button"
                     onClick={() => setActive(t.type)}
-                    className={`w-full inline-flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-medium whitespace-nowrap transition-colors ${
+                    className={`w-full inline-flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-medium whitespace-nowrap transition-colors cursor-pointer ${
                       isActive
                         ? 'bg-orange-500 text-white'
                         : 'text-neutral-600 hover:bg-neutral-200/60'
                     }`}
+
                   >
                     <Icon className="w-4 h-4" /> {t.label}
                   </button>

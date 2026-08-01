@@ -83,9 +83,10 @@ export default function ContentManager({ type, singular, onAuthError }) {
         <button
           type="button"
           onClick={startCreate}
-          className="inline-flex items-center gap-2 rounded-lg bg-orange-500 px-4 py-2 text-sm font-semibold text-white hover:bg-orange-600"
+          className="inline-flex items-center gap-2 rounded-lg bg-orange-500 px-4 py-2 text-sm font-semibold text-white hover:bg-orange-600 cursor-pointer transition-colors"
         >
           <Plus className="w-4 h-4" /> New {singular}
+
         </button>
       </div>
 
@@ -99,9 +100,10 @@ export default function ContentManager({ type, singular, onAuthError }) {
           <button
             type="button"
             onClick={() => refetch()}
-            className="rounded-lg border border-neutral-300 px-4 py-2 text-sm hover:bg-neutral-50"
+            className="rounded-lg border border-neutral-300 px-4 py-2 text-sm hover:bg-neutral-50 cursor-pointer transition-colors"
           >
             Retry
+
           </button>
         </div>
       ) : items.length === 0 ? (
@@ -110,9 +112,10 @@ export default function ContentManager({ type, singular, onAuthError }) {
           <button
             type="button"
             onClick={startCreate}
-            className="inline-flex items-center gap-2 rounded-lg bg-orange-500 px-4 py-2 text-sm font-semibold text-white hover:bg-orange-600"
+            className="inline-flex items-center gap-2 rounded-lg bg-orange-500 px-4 py-2 text-sm font-semibold text-white hover:bg-orange-600 cursor-pointer transition-colors"
           >
             <Plus className="w-4 h-4" /> Create the first one
+
           </button>
         </div>
       ) : (
@@ -190,16 +193,17 @@ function ListRow({ type, item, onEdit, onDeleted, onError }) {
             type="button"
             onClick={doDelete}
             disabled={deleting}
-            className="rounded-lg bg-red-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-red-700 disabled:opacity-50"
+            className="rounded-lg bg-red-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-red-700 disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed transition-colors"
           >
             {deleting ? 'Deleting…' : 'Yes'}
           </button>
           <button
             type="button"
             onClick={() => setConfirming(false)}
-            className="rounded-lg border border-neutral-300 px-3 py-1.5 text-sm hover:bg-neutral-50"
+            className="rounded-lg border border-neutral-300 px-3 py-1.5 text-sm hover:bg-neutral-50 cursor-pointer transition-colors"
           >
             No
+
           </button>
         </div>
       ) : (
@@ -208,7 +212,7 @@ function ListRow({ type, item, onEdit, onDeleted, onError }) {
             type="button"
             onClick={onEdit}
             aria-label="Edit"
-            className="p-2 rounded-lg text-neutral-500 hover:bg-neutral-100 hover:text-neutral-800"
+            className="p-2 rounded-lg text-neutral-500 hover:bg-neutral-100 hover:text-neutral-800 cursor-pointer transition-colors"
           >
             <Pencil className="w-4 h-4" />
           </button>
@@ -216,8 +220,9 @@ function ListRow({ type, item, onEdit, onDeleted, onError }) {
             type="button"
             onClick={() => setConfirming(true)}
             aria-label="Delete"
-            className="p-2 rounded-lg text-neutral-500 hover:bg-red-50 hover:text-red-600"
+            className="p-2 rounded-lg text-neutral-500 hover:bg-red-50 hover:text-red-600 cursor-pointer transition-colors"
           >
+
             <Trash2 className="w-4 h-4" />
           </button>
         </div>
@@ -280,15 +285,16 @@ function ItemForm({ type, singular, item, onCancel, onSaved, onError }) {
         <button
           type="button"
           onClick={onCancel}
-          className="inline-flex items-center gap-2 text-sm text-neutral-500 hover:text-neutral-800"
+          className="inline-flex items-center gap-2 text-sm text-neutral-500 hover:text-neutral-800 cursor-pointer transition-colors"
         >
           <ArrowLeft className="w-4 h-4" /> Back
         </button>
         <button
           type="submit"
           disabled={saving}
-          className="inline-flex items-center gap-2 rounded-lg bg-orange-500 px-5 py-2 text-sm font-semibold text-white hover:bg-orange-600 disabled:opacity-50"
+          className="inline-flex items-center gap-2 rounded-lg bg-orange-500 px-5 py-2 text-sm font-semibold text-white hover:bg-orange-600 disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed transition-colors"
         >
+
           {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
           {isNew ? `Create ${singular}` : 'Save changes'}
         </button>
@@ -422,8 +428,9 @@ function Field({ field, value, onChange }) {
                   type="button"
                   onClick={() => onChange(n)}
                   aria-label={`${n} star${n > 1 ? 's' : ''}`}
-                  className="p-1"
+                  className="p-1 cursor-pointer"
                 >
+
                   <Star
                     className={`w-6 h-6 ${
                       n <= Number(value) ? 'fill-orange-400 text-orange-400' : 'text-neutral-300'

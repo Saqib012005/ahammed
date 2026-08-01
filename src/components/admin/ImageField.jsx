@@ -50,7 +50,8 @@ export default function ImageField({ value, onChange, label }) {
                 type="button"
                 onClick={() => onChange('')}
                 aria-label="Remove image"
-                className="absolute top-1 right-1 w-6 h-6 rounded-full bg-black/60 text-white flex items-center justify-center hover:bg-black/80"
+                className="absolute top-1 right-1 w-6 h-6 rounded-full bg-black/60 text-white flex items-center justify-center hover:bg-black/80 cursor-pointer transition-colors"
+
               >
                 <X className="w-3.5 h-3.5" />
               </button>
@@ -70,7 +71,8 @@ export default function ImageField({ value, onChange, label }) {
             type="button"
             onClick={() => inputRef.current && inputRef.current.click()}
             disabled={uploading}
-            className="inline-flex items-center gap-2 rounded-lg border border-neutral-300 bg-white px-3 py-2 text-sm font-medium text-neutral-700 hover:bg-neutral-50 disabled:opacity-50"
+            className="inline-flex items-center gap-2 rounded-lg border border-neutral-300 bg-white px-3 py-2 text-sm font-medium text-neutral-700 hover:bg-neutral-50 disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed transition-colors"
+
           >
             <ImagePlus className="w-4 h-4" />
             {uploading ? 'Uploading…' : 'Upload image'}

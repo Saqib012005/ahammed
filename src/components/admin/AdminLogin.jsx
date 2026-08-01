@@ -64,7 +64,8 @@ export default function AdminLogin({ onLoggedIn }) {
                   type="button"
                   onClick={() => setShow((s) => !s)}
                   aria-label={show ? 'Hide password' : 'Show password'}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 p-1 text-neutral-400 hover:text-neutral-700"
+                  className="absolute right-2 top-1/2 -translate-y-1/2 p-1 text-neutral-400 hover:text-neutral-700 cursor-pointer"
+
                 >
                   {show ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                 </button>
@@ -80,7 +81,8 @@ export default function AdminLogin({ onLoggedIn }) {
             <button
               type="submit"
               disabled={busy || !password}
-              className="w-full inline-flex items-center justify-center gap-2 rounded-lg bg-orange-500 px-4 py-2.5 text-sm font-semibold text-white hover:bg-orange-600 disabled:opacity-50"
+              className="w-full inline-flex items-center justify-center gap-2 rounded-lg bg-orange-500 px-4 py-2.5 text-sm font-semibold text-white hover:bg-orange-600 disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed transition-colors"
+
             >
               {busy ? <Loader2 className="w-4 h-4 animate-spin" /> : null}
               {busy ? 'Signing in…' : 'Sign in'}
