@@ -1,0 +1,34 @@
+[
+  {
+    "id": 1,
+    "name": "DG Stream Team",
+    "role": "DG Stream",
+    "rating": 5,
+    "avatar": "https://images.pexels.com/photos/31869537/pexels-photo-31869537.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "quote": "John consistently brought fresh ideas, executed campaigns with precision, and focused on results. His Meta Ads campaign generated qualified leads on a limited budget, while his strategic approach and attention to detail made him a valuable part of our marketing efforts."
+  },
+  {
+    "id": 2,
+    "name": "Principal, Shine A Kids Preschool",
+    "role": "Shine A Kids Preschool",
+    "rating": 5,
+    "avatar": "https://images.pexels.com/photos/29852895/pexels-photo-29852895.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "quote": "John understood our vision and transformed it into engaging social media content that parents genuinely connected with. His creative designs, event promotions, and branding helped strengthen our online presence and made our communication more impactful."
+  },
+  {
+    "id": 3,
+    "name": "Bikram",
+    "role": "Marketing Manager, Ginesys",
+    "rating": 5,
+    "avatar": "https://images.unsplash.com/photo-1654512697978-8ec4b550b0ba?auto=format&fit=crop&w=400&q=80",
+    "quote": "John is proactive, dependable, and always willing to take ownership of new challenges. Whether it was performance marketing, marketing automation, or content campaigns, he consistently delivered high-quality work and contributed to the team’s success."
+  },
+  {
+    "id": 4,
+    "name": "Martha’s Cleaning Services",
+    "role": "Virginia, USA",
+    "rating": 5,
+    "avatar": "https://images.unsplash.com/photo-1654707577020-3514bef8d538?auto=format&fit=crop&w=400&q=80",
+    "quote": "Working with John helped us reach more local customers through targeted Meta Ads. He optimized our campaigns within budget, generated quality leads, and communicated clearly throughout the entire process. We’d gladly work with him again."
+  }
+]

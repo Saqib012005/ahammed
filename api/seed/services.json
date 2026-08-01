@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "title": "Landing Page",
+    "image": "https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=1600&q=85",
+    "description": "Landing Page Design & Conversion Optimization — Create high-converting landing pages designed to generate leads, increase conversions, and maximize your marketing ROI with seamless Google Ads and Meta Ads integration."
+  },
+  {
+    "id": 2,
+    "title": "Sales Page",
+    "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1600&q=85",
+    "description": "Sales Page Copywriting That Converts — Persuasive sales page copywriting focused on turning visitors into paying customers and improving revenue."
+  },
+  {
+    "id": 3,
+    "title": "Copywriting",
+    "image": "https://images.unsplash.com/photo-1547658719-da2b51169166?auto=format&fit=crop&w=1600&q=85",
+    "description": "Copywriting for Brands & Businesses — Professional copywriting services for websites, landing pages, advertisements, emails, product descriptions, and social media campaigns."
+  },
+  {
+    "id": 4,
+    "title": "Content Creation",
+    "image": "https://images.unsplash.com/photo-1627542557169-5ed71c66ed85?auto=format&fit=crop&w=1600&q=85",
+    "description": "Content Creation for Social Media & Brands — Strategic content creation that helps businesses build authority, increase brand awareness, and engage their target audience."
+  },
+  {
+    "id": 5,
+    "title": "Google & Meta Ads",
+    "image": "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?auto=format&fit=crop&w=1600&q=85",
+    "description": "Google & Meta Ads Management — Performance-driven Google Ads and Meta Ads management focused on generating qualified leads, increasing sales, and maximizing return on ad spend (ROAS)."
+  },
+  {
+    "id": 6,
+    "title": "LinkedIn & Twitter Ads",
+    "image": "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1600&q=85",
+    "description": "LinkedIn & Twitter (X) Advertising — Reach decision-makers and high-value audiences through strategic LinkedIn Ads and Twitter (X) Ads campaigns."
+  },
+  {
+    "id": 7,
+    "title": "Funnel Building & Customer Acquisition Systems",
+    "image": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1600&q=85",
+    "description": "Build complete marketing funnels that guide your audience from the first click to the final conversion and improve customer journeys."
+  }
+]

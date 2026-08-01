@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "title": "DG Stream – Lead Generation Campaign",
+    "image": "https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=1600&q=85",
+    "description": "Executed a performance-driven lead generation campaign using Meta Ads and optimized landing pages, generating 8 qualified leads with just ₹2,000 in ad spend through strategic audience targeting and conversion optimization.",
+    "tags": ["Meta Ads", "Lead Generation", "Landing Page", "Performance Marketing"]
+  },
+  {
+    "id": 2,
+    "title": "Ginesys – Multi-Channel Digital Marketing",
+    "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1600&q=85",
+    "description": "Managed multi-channel digital marketing initiatives including YouTube Marketing, LinkedIn Marketing, Twitter Marketing, Google & Meta Ads, WhatsApp & Email Marketing Automation using Salesforce Marketing Cloud (SFMC), and video production & editing to enhance brand visibility, engagement, and lead generation.",
+    "tags": ["Google Ads", "Meta Ads", "LinkedIn Marketing", "Twitter Marketing", "YouTube Marketing", "SFMC"]
+  },
+  {
+    "id": 3,
+    "title": "Shine A Kids Preschool – Social Media Branding",
+    "image": "https://images.unsplash.com/photo-1547658719-da2b51169166?auto=format&fit=crop&w=1600&q=85",
+    "description": "Created engaging social media campaigns, event creatives, and branded content that strengthened the preschool’s online presence, improved parent engagement, and increased brand awareness.",
+    "tags": ["Social Media", "Content Creation", "Branding", "Graphic Design"]
+  },
+  {
+    "id": 4,
+    "title": "Martha's Cleaning Services – Meta Ads Lead Generation",
+    "image": "https://images.unsplash.com/photo-1627542557169-5ed71c66ed85?auto=format&fit=crop&w=1600&q=85",
+    "description": "Planned and managed Meta Ads campaigns that generated 5 qualified leads while maintaining an advertising budget of $10 per day, helping increase local customer inquiries and business visibility.",
+    "tags": ["Meta Ads", "Lead Generation", "Social Media Marketing"]
+  },
+  {
+    "id": 5,
+    "title": "High-Converting Landing Pages & Sales Funnels",
+    "image": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1600&q=85",
+    "description": "Designed conversion-focused landing pages and sales funnels with persuasive copywriting and user-centric layouts to improve lead generation, increase conversions, and maximize marketing ROI.",
+    "tags": ["Landing Pages", "Sales Funnels", "Copywriting", "CRO"]
+  },
+  {
+    "id": 6,
+    "title": "Ginesys – Email Marketing Automation",
+    "image": "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?auto=format&fit=crop&w=1600&q=85",
+    "description": "Built and managed Email Marketing Automation using Salesforce Marketing Cloud (SFMC) to nurture prospects, generate qualified leads, and drive product demo bookings through personalized customer journeys and automated campaigns.",
+    "tags": ["Email Marketing", "SFMC", "Marketing Automation", "Lead Nurturing"]
+  }
+]
