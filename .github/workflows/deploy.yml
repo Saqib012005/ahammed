@@ -55,9 +55,10 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          # The folder Hostinger serves your domain from. Usually public_html/.
-          # If your FTP account already lands inside public_html, change to ./
-          server-dir: public_html/
+          # This FTP account already lands INSIDE public_html, so deploy to the
+          # FTP root (./). Using public_html/ here would nest files as
+          # public_html/public_html/ and the site/API would 404.
+          server-dir: ./
           local-dir: ./deploy/
           # Never upload dev/CI cruft.
           exclude: |
