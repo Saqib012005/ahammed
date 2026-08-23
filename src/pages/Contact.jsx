@@ -3,6 +3,12 @@ import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Linkedin, ArrowUpRight, Send } from 'lucide-react';
 import { toast } from '../components/ui/sonner';
 import { contactInfo } from '../mock';
+import {
+  trackContactFormSubmit,
+  trackEmailClick,
+  trackPhoneClick,
+  trackSocialClick,
+} from '../lib/analytics';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -19,12 +25,14 @@ const details = [
     label: 'Email',
     value: contactInfo.email,
     href: `mailto:${contactInfo.email}`,
+    onTrack: () => trackEmailClick('contact_page'),
   },
   {
     icon: Phone,
     label: 'Phone',
     value: contactInfo.phone,
     href: `tel:${contactInfo.phone.replace(/\s+/g, '')}`,
+    onTrack: () => trackPhoneClick('contact_page'),
   },
   {
     icon: Linkedin,
@@ -32,6 +40,7 @@ const details = [
     value: 'Ahammad John Mohammad',
     href: contactInfo.linkedin,
     external: true,
+    onTrack: () => trackSocialClick('linkedin', contactInfo.linkedin, 'contact_page'),
   },
   {
     icon: MapPin,
@@ -67,6 +76,10 @@ export default function Contact() {
     e.preventDefault();
     if (!validate()) return;
     setSubmitting(true);
+
+    // Analytics: record that a valid enquiry was submitted. We send NO form
+    // contents — only a non-identifying flag for whether a subject was filled.
+    trackContactFormSubmit({ has_subject: Boolean(form.subject.trim()) });
 
     // No backend wired yet — open the visitor's email client pre-filled so the
     // message reaches John reliably, and confirm with a toast.
@@ -196,7 +209,7 @@ export default function Contact() {
 
         {/* Details */}
         <motion.div variants={fadeUp} initial="hidden" animate="show" custom={2} className="space-y-4">
-          {details.map(({ icon: Icon, label, value, href, external }) => {
+          {details.map(({ icon: Icon, label, value, href, external, onTrack }) => {
             const inner = (
               <>
                 <span className="w-11 h-11 shrink-0 rounded-full bg-[var(--orange)]/10 text-[var(--orange)] flex items-center justify-center">
@@ -220,6 +233,7 @@ export default function Contact() {
                 href={href}
                 target={external ? '_blank' : undefined}
                 rel={external ? 'noreferrer' : undefined}
+                onClick={onTrack}
                 className={cardCls}
               >
                 {inner}
@@ -241,6 +255,7 @@ export default function Contact() {
             </p>
             <a
               href={`mailto:${contactInfo.email}`}
+              onClick={() => trackEmailClick('contact_cta')}
               className="group mt-5 inline-flex items-center gap-2 bg-[var(--orange)] text-white rounded-full pl-5 pr-2 py-2 font-medium transition-transform hover:scale-105"
             >
               Email me

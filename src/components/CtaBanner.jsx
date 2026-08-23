@@ -1,6 +1,7 @@
 import { Check, ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { ctaFeatures, ctaServices } from '../mock';
+import { trackCtaClick } from '../lib/analytics';
 
 export default function CtaBanner() {
   return (
@@ -35,6 +36,7 @@ export default function CtaBanner() {
 
         <Link
           to="/contact"
+          onClick={() => trackCtaClick('Start a project', 'cta_banner')}
           className="group mt-8 inline-flex items-center gap-2 bg-[var(--dark-bg)] text-white rounded-full pl-6 pr-2 py-2 font-medium transition-colors duration-300 hover:bg-[var(--orange)]"
         >
           Start a project

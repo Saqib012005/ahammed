@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { ArrowUpRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useProjects, mediaUrl } from '../lib/content';
+import { trackProjectClick } from '../lib/analytics';
 
 export default function Portfolio() {
   const { projects } = useProjects();
@@ -84,7 +85,11 @@ export default function Portfolio() {
             {current.description}
           </p>
         </div>
-        <button className="shrink-0 w-12 h-12 rounded-full bg-[var(--orange)] text-white flex items-center justify-center hover:rotate-45 transition-transform duration-300 shadow-lg">
+        <button
+          onClick={() => trackProjectClick(current.title)}
+          aria-label={`View project: ${current.title}`}
+          className="shrink-0 w-12 h-12 rounded-full bg-[var(--orange)] text-white flex items-center justify-center hover:rotate-45 transition-transform duration-300 shadow-lg"
+        >
           <ArrowUpRight className="w-5 h-5" />
         </button>
       </div>

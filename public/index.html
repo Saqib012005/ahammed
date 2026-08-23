@@ -3,6 +3,22 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <!-- Google tag (gtag.js) — Google Analytics 4 -->
+        <!-- Loads asynchronously. `send_page_view: false` disables the automatic
+             page_view because this is a single-page app: the React app sends one
+             page_view on load and on every client-side route change (see
+             src/lib/analytics.js + src/App.js), which avoids duplicate page views. -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-ETL07JLGS6"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag("js", new Date());
+            gtag("config", "G-ETL07JLGS6", { send_page_view: false });
+        </script>
+
         <meta name="theme-color" content="#FF7A1A" />
         <meta
             name="description"

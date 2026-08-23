@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Suspense, lazy } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { heroData } from '../mock';
+import { trackCtaClick } from '../lib/analytics';
 
 const HeroScene = lazy(() => import('./HeroScene'));
 
@@ -196,7 +197,10 @@ export default function Hero() {
               className="group inline-flex items-center gap-2 bg-[var(--dark-bg)] text-white rounded-full pl-6 pr-2 py-2 font-medium transition-colors duration-300"
               whileHover={{ scale: 1.05, backgroundColor: '#FF7A1A' }}
               whileTap={{ scale: 0.97 }}
-              onClick={() => navigate('/contact')}
+              onClick={() => {
+                trackCtaClick('Hire Me', 'hero');
+                navigate('/contact');
+              }}
               data-magnetic
             >
               Hire Me
@@ -210,7 +214,10 @@ export default function Hero() {
             </motion.button>
             <motion.button
               whileHover={{ y: -2 }}
-              onClick={() => navigate('/contact')}
+              onClick={() => {
+                trackCtaClick("Let's Talk", 'hero');
+                navigate('/contact');
+              }}
               className="text-[var(--text-primary)] font-medium underline underline-offset-4 decoration-2 decoration-[var(--orange)] hover:text-[var(--orange)] transition-colors"
               data-magnetic
             >

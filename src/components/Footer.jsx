@@ -1,6 +1,7 @@
 import { Twitter, Instagram, Linkedin, Mail, Phone, MapPin } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { footerData, contactInfo } from '../mock';
+import { trackSocialClick, trackEmailClick, trackPhoneClick } from '../lib/analytics';
 
 const icons = { twitter: Twitter, instagram: Instagram, linkedin: Linkedin };
 const socialUrls = {
@@ -55,6 +56,7 @@ export default function Footer() {
                     target="_blank"
                     rel="noreferrer"
                     aria-label={s}
+                    onClick={() => trackSocialClick(s, socialUrls[s], 'footer')}
                     className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-[var(--orange)] hover:border-[var(--orange)] transition-colors"
                   >
                     <Icon className="w-4 h-4" />
@@ -101,6 +103,7 @@ export default function Footer() {
               <li>
                 <a
                   href={`mailto:${contactInfo.email}`}
+                  onClick={() => trackEmailClick('footer')}
                   className="flex items-center gap-2 text-white/60 hover:text-white transition-colors"
                 >
                   <Mail className="w-4 h-4 shrink-0" />
@@ -110,6 +113,7 @@ export default function Footer() {
               <li>
                 <a
                   href={`tel:${contactInfo.phone.replace(/\s+/g, '')}`}
+                  onClick={() => trackPhoneClick('footer')}
                   className="flex items-center gap-2 text-white/60 hover:text-white transition-colors"
                 >
                   <Phone className="w-4 h-4 shrink-0" />

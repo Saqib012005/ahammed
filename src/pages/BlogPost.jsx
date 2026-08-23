@@ -4,6 +4,7 @@ import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, ArrowUpRight } from 'lucide-react';
 import { useBlogs, mediaUrl } from '../lib/content';
 import { formatDate } from '../lib/format';
+import { trackCtaClick } from '../lib/analytics';
 import NotFound from './NotFound';
 
 export default function BlogPost() {
@@ -89,6 +90,7 @@ export default function BlogPost() {
           </p>
           <Link
             to="/contact"
+            onClick={() => trackCtaClick('Get in touch', 'blog_post')}
             className="group mt-5 inline-flex items-center gap-2 bg-[var(--orange)] text-white rounded-full pl-5 pr-2 py-2 font-medium transition-transform hover:scale-105"
           >
             Get in touch

@@ -12,6 +12,7 @@ import Contact from './pages/Contact';
 import NotFound from './pages/NotFound';
 import Admin from './pages/Admin';
 import useReveal from './hooks/useReveal';
+import { trackPageView } from './lib/analytics';
 import { Toaster } from './components/ui/sonner';
 
 function App() {
@@ -24,6 +25,13 @@ function App() {
 
   // Re-run reveal observers whenever the route changes so new page content animates in.
   useReveal(location.pathname);
+
+  // GA4 page_view on initial load and on every client-side route change. The
+  // private /admin area is deliberately excluded from marketing analytics.
+  useEffect(() => {
+    if (location.pathname.startsWith('/admin')) return;
+    trackPageView({ path: location.pathname + location.search });
+  }, [location.pathname, location.search]);
 
   useEffect(() => {
     const handler = (e) => {

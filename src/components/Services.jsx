@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 import { useServices, mediaUrl } from '../lib/content';
+import { trackServiceClick } from '../lib/analytics';
 import Tilt3D from './Tilt3D';
 
 export default function Services() {
@@ -89,6 +90,7 @@ export default function Services() {
                     <button
                       aria-label="View service"
                       data-magnetic
+                      onClick={() => trackServiceClick(s.title)}
                       className="absolute bottom-4 right-4 z-20 w-14 h-14 rounded-full bg-[var(--timeline-dark)] text-white flex items-center justify-center hover:bg-[var(--orange)] hover:rotate-45 transition-all duration-300 shadow-[0_10px_30px_rgba(0,0,0,0.45)] ring-2 ring-white/10"
                     >
                       <ArrowUpRight className="w-6 h-6" />
