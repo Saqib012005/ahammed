@@ -10,11 +10,12 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
-import { Plus, Pencil, Trash2, ArrowLeft, Loader2, Save, Star } from 'lucide-react';
+import { Plus, Pencil, Trash2, ArrowLeft, Loader2, Save, Star, Eye, X } from 'lucide-react';
 import { list, create, update, remove, ApiError } from '../../lib/admin';
 import { mediaUrl } from '../../lib/content';
 import { SCHEMAS, emptyItem, toFormValues, toPayload, validate } from './schema';
 import ImageField from './ImageField';
+import RichTextEditor from './RichTextEditor';
 
 export default function ContentManager({ type, singular, onAuthError }) {
   const schema = SCHEMAS[type];
@@ -242,6 +243,7 @@ function ItemForm({ type, singular, item, onCancel, onSaved, onError }) {
   const [values, setValues] = useState(initial);
   const [saving, setSaving] = useState(false);
   const [errors, setErrors] = useState([]);
+  const [showPreviewModal, setShowPreviewModal] = useState(false);
 
   useEffect(() => {
     setValues(initial);
@@ -289,15 +291,26 @@ function ItemForm({ type, singular, item, onCancel, onSaved, onError }) {
         >
           <ArrowLeft className="w-4 h-4" /> Back
         </button>
-        <button
-          type="submit"
-          disabled={saving}
-          className="inline-flex items-center gap-2 rounded-lg bg-orange-500 px-5 py-2 text-sm font-semibold text-white hover:bg-orange-600 disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed transition-colors"
-        >
 
-          {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
-          {isNew ? `Create ${singular}` : 'Save changes'}
-        </button>
+        <div className="flex items-center gap-2.5">
+          {type === 'blogs' && (
+            <button
+              type="button"
+              onClick={() => setShowPreviewModal(true)}
+              className="inline-flex items-center gap-2 rounded-lg border border-neutral-300 bg-white px-4 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-50 cursor-pointer transition-colors shadow-xs"
+            >
+              <Eye className="w-4 h-4 text-orange-500" /> Preview Blog
+            </button>
+          )}
+          <button
+            type="submit"
+            disabled={saving}
+            className="inline-flex items-center gap-2 rounded-lg bg-orange-500 px-5 py-2 text-sm font-semibold text-white hover:bg-orange-600 disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed transition-colors"
+          >
+            {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
+            {isNew ? `Create ${singular}` : 'Save changes'}
+          </button>
+        </div>
       </div>
 
       <h2 className="text-xl font-semibold text-neutral-900 mb-5">
@@ -322,6 +335,87 @@ function ItemForm({ type, singular, item, onCancel, onSaved, onError }) {
           />
         ))}
       </div>
+
+      {/* Blog Preview Modal before publishing */}
+      {showPreviewModal && (
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto">
+          <div className="bg-white rounded-3xl shadow-2xl border border-neutral-200 w-full max-w-4xl max-h-[90vh] flex flex-col overflow-hidden my-auto animate-in fade-in zoom-in-95 duration-200">
+            {/* Modal Header */}
+            <div className="flex items-center justify-between px-6 py-4 border-b border-neutral-200 bg-neutral-50/80">
+              <div className="flex items-center gap-3">
+                <span className="text-xs font-bold uppercase tracking-wider bg-orange-100 text-orange-700 px-2.5 py-1 rounded-full">
+                  Full Article Preview
+                </span>
+                <span className="text-xs font-medium text-neutral-500">
+                  {values.published ? '🟢 Published Mode' : '🟡 Draft Mode'}
+                </span>
+              </div>
+              <button
+                type="button"
+                onClick={() => setShowPreviewModal(false)}
+                className="p-1.5 text-neutral-400 hover:text-neutral-700 hover:bg-neutral-200 rounded-lg transition-colors cursor-pointer"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Modal Body - simulates public BlogPost layout */}
+            <div className="p-6 md:p-10 overflow-y-auto space-y-6">
+              <div className="flex items-center gap-3 text-xs text-neutral-500">
+                <span className="font-medium bg-orange-500/10 text-orange-600 px-3 py-1 rounded-full">
+                  {values.category || 'General'}
+                </span>
+                <span>{values.date || 'Today'}</span>
+                <span>&bull;</span>
+                <span>{values.readTime || '5 min read'}</span>
+              </div>
+
+              <h1 className="font-serif-display text-3xl md:text-5xl font-bold text-neutral-900 leading-tight">
+                {values.title || 'Untitled Blog Post'}
+              </h1>
+
+              <p className="text-neutral-500 text-sm">by {values.author || 'John'}</p>
+
+              {values.image && (
+                <div className="relative aspect-[16/9] rounded-2xl overflow-hidden bg-neutral-900 border border-neutral-200 shadow-md">
+                  <img
+                    src={mediaUrl(values.image)}
+                    alt={values.title || 'Cover'}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              )}
+
+              {values.excerpt && (
+                <p className="text-lg text-neutral-600 italic border-l-4 border-orange-500 pl-4 py-1">
+                  {values.excerpt}
+                </p>
+              )}
+
+              <div
+                className="blog-content rich-text-output text-neutral-800 text-base md:text-lg leading-relaxed space-y-4 pt-4 border-t border-neutral-100"
+                dangerouslySetInnerHTML={{
+                  __html: values.content || '<p class="text-neutral-400 italic">No content yet.</p>',
+                }}
+              />
+            </div>
+
+            {/* Modal Footer */}
+            <div className="flex items-center justify-between px-6 py-4 border-t border-neutral-200 bg-neutral-50">
+              <span className="text-xs text-neutral-500">
+                Slug: <code className="text-orange-600 font-mono">/blog/{values.slug || 'auto-generated'}</code>
+              </span>
+              <button
+                type="button"
+                onClick={() => setShowPreviewModal(false)}
+                className="px-5 py-2 text-sm font-semibold rounded-lg bg-neutral-900 text-white hover:bg-black transition-colors cursor-pointer"
+              >
+                Close Preview
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </form>
   );
 }
@@ -396,6 +490,19 @@ function Field({ field, value, onChange }) {
             onChange={(e) => onChange(e.target.value)}
             placeholder={field.placeholder}
             className={`${inputCls} font-mono leading-relaxed`}
+          />
+          {hint}
+        </div>
+      );
+
+    case 'richtext':
+      return (
+        <div>
+          {labelEl}
+          <RichTextEditor
+            value={value || ''}
+            onChange={onChange}
+            placeholder={field.placeholder}
           />
           {hint}
         </div>

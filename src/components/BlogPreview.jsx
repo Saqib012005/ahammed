@@ -48,14 +48,11 @@ export default function BlogPreview() {
             className="reveal group relative rounded-3xl overflow-hidden hover-lift block"
             style={{ transitionDelay: `${idx * 80}ms` }}
           >
-            <div
-              className="relative aspect-[4/3] rounded-3xl overflow-hidden"
-              style={{ backgroundColor: post.bg }}
-            >
+            <div className="relative aspect-[4/3] rounded-3xl overflow-hidden bg-neutral-900">
               <img
                 src={mediaUrl(post.image)}
                 alt={post.title}
-                className="w-full h-full object-cover mix-blend-overlay opacity-90 transition-transform duration-700 group-hover:scale-110"
+                className="w-full h-full object-cover opacity-95 transition-transform duration-700 group-hover:scale-110"
                 loading="lazy"
                 decoding="async"
               />

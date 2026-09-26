@@ -143,11 +143,10 @@ function normalize_item(string $type, array $in, ?array $existing, array $all): 
     switch ($type) {
         case 'blogs':
             $title = (string) $str('title', 'Untitled');
-            // content may arrive as an array of paragraphs or a blob of text.
             if (array_key_exists('content', $in)) {
-                $content = normalize_paragraphs($in['content']);
+                $content = normalize_blog_content($in['content']);
             } else {
-                $content = $existing['content'] ?? [];
+                $content = $existing['content'] ?? '';
             }
             $slug = (string) $str('slug', '');
             if ($slug === '') {
@@ -168,7 +167,6 @@ function normalize_item(string $type, array $in, ?array $existing, array $all): 
                 'excerpt'   => (string) $str('excerpt', ''),
                 'title'     => $title,
                 'image'     => (string) $str('image', ''),
-                'bg'        => (string) $str('bg', '#FF7A1A'),
                 'content'   => $content,
             ];
 
@@ -200,6 +198,20 @@ function normalize_item(string $type, array $in, ?array $existing, array $all): 
     }
 
     return $in;
+}
+
+// Accept an array of paragraphs, or a string with blank-line/newline breaks.
+// Accept a rich text HTML string or an array of paragraphs.
+function normalize_blog_content($value)
+{
+    if (is_array($value)) {
+        return normalize_paragraphs($value);
+    }
+    $text = trim((string) $value);
+    if (preg_match('/<[a-z][\s\S]*>/i', $text)) {
+        return $text;
+    }
+    return normalize_paragraphs($text);
 }
 
 // Accept an array of paragraphs, or a string with blank-line/newline breaks.
@@ -253,11 +265,15 @@ function normalize_date($value): string
 }
 
 // Rough "N min read" estimate at ~200 words/min.
-function estimate_read_time(array $paragraphs): string
+function estimate_read_time($content): string
 {
     $words = 0;
-    foreach ($paragraphs as $p) {
-        $words += str_word_count((string) $p);
+    if (is_array($content)) {
+        foreach ($content as $p) {
+            $words += str_word_count(strip_tags((string) $p));
+        }
+    } else {
+        $words = str_word_count(strip_tags((string) $content));
     }
     $minutes = max(1, (int) ceil($words / 200));
     return $minutes . ' min read';

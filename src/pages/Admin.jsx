@@ -14,12 +14,14 @@ import { isAuthed, logout as clearAuth } from '../lib/admin';
 export default function Admin() {
   const [authed, setAuthed] = useState(isAuthed());
 
-  // Keep the browser tab title distinct from the public site.
+  // Keep the browser tab title distinct and restore normal system cursor on admin pages.
   useEffect(() => {
     const prev = document.title;
     document.title = 'Admin · Content';
+    document.body.classList.add('admin-mode');
     return () => {
       document.title = prev;
+      document.body.classList.remove('admin-mode');
     };
   }, []);
 

@@ -52,14 +52,11 @@ export default function BlogPost() {
 
       {/* Cover image */}
       <div className="px-4 md:px-10 lg:px-16 max-w-[1000px] mx-auto mt-8">
-        <div
-          className="relative aspect-[16/9] rounded-3xl overflow-hidden"
-          style={{ backgroundColor: post.bg }}
-        >
+        <div className="relative aspect-[16/9] rounded-3xl overflow-hidden bg-neutral-900 border border-neutral-800 shadow-xl">
           <img
             src={mediaUrl(post.image)}
             alt={post.title}
-            className="w-full h-full object-cover mix-blend-overlay opacity-90"
+            className="w-full h-full object-cover"
             loading="eager"
             decoding="async"
           />
@@ -68,15 +65,19 @@ export default function BlogPost() {
 
       {/* Body */}
       <div className="px-4 md:px-10 lg:px-16 max-w-[820px] mx-auto mt-10">
-        <div className="space-y-6">
-          {post.content.map((para, i) => (
-            <p
-              key={i}
-              className="text-[var(--text-primary)]/90 text-lg leading-relaxed"
-            >
-              {para}
-            </p>
-          ))}
+        <div className="blog-content text-[var(--text-primary)]/90 text-lg leading-relaxed space-y-6">
+          {typeof post.content === 'string' ? (
+            <div
+              className="rich-text-output"
+              dangerouslySetInnerHTML={{ __html: post.content }}
+            />
+          ) : Array.isArray(post.content) ? (
+            post.content.map((para, i) => (
+              <p key={i} className="leading-relaxed">
+                {para}
+              </p>
+            ))
+          ) : null}
         </div>
 
         {/* Inline CTA */}
@@ -113,14 +114,11 @@ export default function BlogPost() {
               to={`/blog/${r.slug}`}
               className="group flex flex-col rounded-3xl overflow-hidden border border-[var(--border-c)] bg-white hover-lift"
             >
-              <div
-                className="relative aspect-[16/10] overflow-hidden"
-                style={{ backgroundColor: r.bg }}
-              >
+              <div className="relative aspect-[16/10] overflow-hidden bg-neutral-900">
                 <img
                   src={mediaUrl(r.image)}
                   alt={r.title}
-                  className="w-full h-full object-cover mix-blend-overlay opacity-90 transition-transform duration-700 group-hover:scale-110"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   loading="lazy"
                   decoding="async"
                 />

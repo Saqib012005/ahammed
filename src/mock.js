@@ -260,7 +260,6 @@ export const blogPosts = [
     title: 'How to Build a Landing Page That Converts Visitors into Customers',
     image:
       'https://images.pexels.com/photos/28494632/pexels-photo-28494632.jpeg?auto=compress&cs=tinysrgb&w=1600',
-    bg: '#7B5CFF',
     content: [
       'A landing page has one job: turn a visitor into a lead or a customer. Unlike a homepage that tries to do everything, a great landing page removes distraction and points every element toward a single action.',
       'Start with a headline that speaks to the outcome your visitor wants. It should be specific, benefit-led, and readable in under three seconds. Pair it with a sub-headline that handles the immediate "how".',
@@ -280,7 +279,6 @@ export const blogPosts = [
     title: 'Google Ads vs. Meta Ads: Which Platform Delivers Better ROI?',
     image:
       'https://images.pexels.com/photos/30547584/pexels-photo-30547584.jpeg?auto=compress&cs=tinysrgb&w=1600',
-    bg: '#1E9E6A',
     content: [
       'Google Ads captures existing demand — people actively searching for what you sell. Meta Ads creates demand — reaching people based on interests and behaviour before they have started looking.',
       'If your product solves an urgent, searchable problem, Google usually wins on intent. If your product is visual, discovery-led, or new to the market, Meta’s targeting and creative formats often deliver a lower cost per acquisition.',
@@ -300,7 +298,6 @@ export const blogPosts = [
     title: 'The Lead Generation Blueprint for More Qualified Leads Online',
     image:
       'https://images.pexels.com/photos/7562087/pexels-photo-7562087.jpeg?auto=compress&cs=tinysrgb&w=1600',
-    bg: '#F1B81C',
     content: [
       'Qualified leads come from a system, not a single tactic. The blueprint has four parts: an offer, a traffic source, a capture mechanism, and a follow-up sequence.',
       'Your offer must be worth an email address. Free audits, checklists, and templates work because they deliver value before asking for the sale.',
@@ -320,7 +317,6 @@ export const blogPosts = [
     title: 'Copywriting That Sells: Principles Behind High-Converting Words',
     image:
       'https://images.pexels.com/photos/1591056/pexels-photo-1591056.jpeg?auto=compress&cs=tinysrgb&w=1600',
-    bg: '#FF7A1A',
     content: [
       'Great copy is not clever — it is clear. The first job of every sentence is to get the next one read.',
       'Write to one person. "You" outsells "our customers" every time because it feels like a conversation, not a broadcast.',
@@ -340,7 +336,6 @@ export const blogPosts = [
     title: 'Email Marketing Automation: Turn Sign-Ups into Customers',
     image:
       'https://images.pexels.com/photos/4132538/pexels-photo-4132538.jpeg?auto=compress&cs=tinysrgb&w=1600',
-    bg: '#2563EB',
     content: [
       'Automation lets you have the right conversation with every lead at scale. A welcome sequence introduces your brand; a nurture sequence builds authority; a sales sequence makes the offer.',
       'Segment by behaviour, not just demographics. Someone who clicked a pricing link is a very different lead from someone who only opened a newsletter.',
@@ -360,7 +355,6 @@ export const blogPosts = [
     title: 'Social Media Branding: Build a Presence People Remember',
     image:
       'https://images.pexels.com/photos/607812/pexels-photo-607812.jpeg?auto=compress&cs=tinysrgb&w=1600',
-    bg: '#DB2777',
     content: [
       'A memorable brand is consistent. Same voice, same visual language, same values across every post — that repetition is what makes you recognisable.',
       'Lead with value, not promotion. Teach, entertain, or inspire, and the audience will give you permission to sell.',

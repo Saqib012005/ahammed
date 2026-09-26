@@ -65,11 +65,16 @@ export default function Navbar() {
       <nav className="flex items-center gap-1 bg-[var(--navbar-bg)] text-white rounded-full px-2 py-2 shadow-2xl border border-white/5 backdrop-blur-md">
         {left.map(renderLink)}
 
-        <Link to="/" className="mx-2 md:mx-4 flex items-center gap-2" aria-label="Home">
-          <div className="w-8 h-8 rounded-full bg-[var(--orange)] flex items-center justify-center text-white font-bold text-xs">
-            J
-          </div>
-          <span className="hidden sm:inline font-bold tracking-wide text-base">JOHN</span>
+        <Link
+          to="/"
+          className="mx-2 md:mx-4 flex items-center group transition-transform duration-200 hover:scale-105"
+          aria-label="The Copy Studio - Home"
+        >
+          <img
+            src="/brand/the-copy-studio-white.png"
+            alt="The Copy Studio"
+            className="h-5 sm:h-6 md:h-7 w-auto object-contain"
+          />
         </Link>
 
         {right.map(renderLink)}

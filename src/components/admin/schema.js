@@ -39,8 +39,7 @@ export const SCHEMAS = {
       { name: 'published', label: 'Published', kind: 'boolean', default: true, hint: 'Unpublished posts are hidden from the public site.' },
       { name: 'excerpt', label: 'Excerpt', kind: 'textarea', placeholder: 'A short summary shown on the blog list.' },
       { name: 'image', label: 'Cover image', kind: 'image' },
-      { name: 'bg', label: 'Accent colour', kind: 'color', default: '#FF7A1A' },
-      { name: 'content', label: 'Content', kind: 'paragraphs', required: true, hint: 'Separate paragraphs with a blank line.' },
+      { name: 'content', label: 'Blog Content', kind: 'richtext', required: true, hint: 'Format headings, bold/italic, lists, links, quotes, and images using the editor.' },
       { name: 'slug', label: 'Slug', kind: 'text', placeholder: 'Auto from title', hint: 'URL path. Leave blank to generate from the title.' },
     ],
   },
@@ -104,6 +103,12 @@ export function toFormValues(type, item) {
     const v = item[f.name];
     if (f.kind === 'paragraphs') {
       values[f.name] = Array.isArray(v) ? v.join('\n\n') : v || '';
+    } else if (f.kind === 'richtext') {
+      if (Array.isArray(v)) {
+        values[f.name] = v.map((p) => `<p>${p}</p>`).join('');
+      } else {
+        values[f.name] = v || '';
+      }
     } else if (f.kind === 'tags') {
       values[f.name] = Array.isArray(v) ? v.join(', ') : v || '';
     } else if (f.kind === 'boolean') {
@@ -128,6 +133,8 @@ export function toPayload(type, values) {
         .split(/\n\s*\n/)
         .map((p) => p.trim())
         .filter(Boolean);
+    } else if (f.kind === 'richtext') {
+      payload[f.name] = String(v ?? '').trim();
     } else if (f.kind === 'tags') {
       payload[f.name] = String(v || '')
         .split(',')
@@ -151,11 +158,17 @@ export function validate(type, values) {
   schema.fields.forEach((f) => {
     if (!f.required) return;
     const v = values[f.name];
-    const empty =
-      v === undefined ||
-      v === null ||
-      (typeof v === 'string' && v.trim() === '') ||
-      (Array.isArray(v) && v.length === 0);
+    let empty = false;
+    if (f.kind === 'richtext') {
+      const stripped = String(v || '').replace(/<[^>]*>/g, '').trim();
+      empty = stripped === '' && !String(v || '').includes('<img');
+    } else {
+      empty =
+        v === undefined ||
+        v === null ||
+        (typeof v === 'string' && v.trim() === '') ||
+        (Array.isArray(v) && v.length === 0);
+    }
     if (empty) errors.push(`${f.label} is required.`);
   });
   return errors;
