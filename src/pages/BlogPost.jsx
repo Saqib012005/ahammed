@@ -56,6 +56,8 @@ export default function BlogPost() {
           <img
             src={mediaUrl(post.image)}
             alt={post.title}
+            width="1000"
+            height="562"
             className="w-full h-full object-cover"
             loading="eager"
             decoding="async"
@@ -118,6 +120,8 @@ export default function BlogPost() {
                 <img
                   src={mediaUrl(r.image)}
                   alt={r.title}
+                  width="600"
+                  height="375"
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   loading="lazy"
                   decoding="async"

@@ -73,6 +73,8 @@ export default function Navbar() {
           <img
             src="/brand/the-copy-studio-white.png"
             alt="The Copy Studio"
+            width="160"
+            height="28"
             className="h-5 sm:h-6 md:h-7 w-auto object-contain"
           />
         </Link>

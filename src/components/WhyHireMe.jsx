@@ -43,6 +43,8 @@ export default function WhyHireMe() {
             <img
               src={whyHireMe.portrait}
               alt="John portrait"
+              width="400"
+              height="533"
               className="absolute inset-0 w-full h-full object-cover object-center"
               loading="lazy"
               decoding="async"

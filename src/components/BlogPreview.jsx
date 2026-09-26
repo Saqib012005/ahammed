@@ -52,6 +52,8 @@ export default function BlogPreview() {
               <img
                 src={mediaUrl(post.image)}
                 alt={post.title}
+                width="600"
+                height="450"
                 className="w-full h-full object-cover opacity-95 transition-transform duration-700 group-hover:scale-110"
                 loading="lazy"
                 decoding="async"

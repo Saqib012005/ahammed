@@ -12,7 +12,7 @@ function Blob() {
   });
   return (
     <Float speed={1.5} rotationIntensity={1.5} floatIntensity={1.2}>
-      <Sphere ref={ref} args={[1, 128, 128]} scale={0.5} position={[3.2, -1.8, 0]}>
+      <Sphere ref={ref} args={[1, 32, 32]} scale={0.5} position={[3.2, -1.8, 0]}>
         <MeshDistortMaterial
           color="#FF7A1A"
           distort={0.45}
@@ -29,7 +29,7 @@ function FloatingRing({ position, color = '#FFA45C', scale = 1 }) {
   return (
     <Float speed={2} rotationIntensity={2} floatIntensity={1.5}>
       <mesh position={position} scale={scale} rotation={[0.5, 0.5, 0]}>
-        <torusGeometry args={[0.35, 0.08, 24, 100]} />
+        <torusGeometry args={[0.35, 0.08, 16, 32]} />
         <meshStandardMaterial color={color} metalness={0.6} roughness={0.2} />
       </mesh>
     </Float>
@@ -51,8 +51,8 @@ export default function HeroScene() {
   return (
     <Canvas
       camera={{ position: [0, 0, 4], fov: 45 }}
-      dpr={[1, 2]}
-      gl={{ antialias: true, alpha: true }}
+      dpr={[1, 1.5]}
+      gl={{ antialias: false, alpha: true, powerPreference: 'low-power' }}
       style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }}
     >
       <Suspense fallback={null}>

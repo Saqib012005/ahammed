@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, Suspense, lazy } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import './App.css';
 import Navbar from './components/Navbar';
@@ -6,14 +6,16 @@ import Footer from './components/Footer';
 import MagneticCursor from './components/MagneticCursor';
 import ScrollToTop from './components/ScrollToTop';
 import Home from './pages/Home';
-import BlogPage from './pages/BlogPage';
-import BlogPost from './pages/BlogPost';
-import Contact from './pages/Contact';
-import NotFound from './pages/NotFound';
-import Admin from './pages/Admin';
 import useReveal from './hooks/useReveal';
 import { trackPageView } from './lib/analytics';
 import { Toaster } from './components/ui/sonner';
+
+// Code split secondary routes to drastically reduce initial JavaScript load
+const BlogPage = lazy(() => import('./pages/BlogPage'));
+const BlogPost = lazy(() => import('./pages/BlogPost'));
+const Contact = lazy(() => import('./pages/Contact'));
+const NotFound = lazy(() => import('./pages/NotFound'));
+const Admin = lazy(() => import('./pages/Admin'));
 
 function App() {
   const location = useLocation();
@@ -21,7 +23,6 @@ function App() {
   // The hidden admin area is a self-contained full-screen UI: no public
   // Navbar/Footer/cursor chrome, and it manages its own layout.
   const isAdmin = location.pathname.startsWith('/admin');
-
 
   // Re-run reveal observers whenever the route changes so new page content animates in.
   useReveal(location.pathname);
@@ -45,13 +46,15 @@ function App() {
   // Admin renders on its own, without the public chrome.
   if (isAdmin) {
     return (
-      <>
+      <div className="admin-page">
         <ScrollToTop />
-        <Routes>
-          <Route path="/admin" element={<Admin />} />
-        </Routes>
+        <Suspense fallback={<div className="min-h-screen bg-neutral-900" />}>
+          <Routes>
+            <Route path="/admin" element={<Admin />} />
+          </Routes>
+        </Suspense>
         <Toaster position="bottom-right" />
-      </>
+      </div>
     );
   }
 
@@ -61,19 +64,20 @@ function App() {
       <ScrollToTop />
       <Navbar />
       <main className="relative">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/blog" element={<BlogPage />} />
-          <Route path="/blog/:slug" element={<BlogPost />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <Suspense fallback={null}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/blog" element={<BlogPage />} />
+            <Route path="/blog/:slug" element={<BlogPost />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Suspense>
       </main>
       <Footer />
       <Toaster position="bottom-right" />
     </div>
   );
-
 }
 
 export default App;

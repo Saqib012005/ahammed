@@ -83,6 +83,8 @@ export default function Services() {
                     <img
                       src={mediaUrl(s.image)}
                       alt={s.title}
+                      width="600"
+                      height="450"
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 saturate-[1.05] contrast-[1.03] brightness-[0.96]"
                       loading="lazy"
                       decoding="async"

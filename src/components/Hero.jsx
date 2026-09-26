@@ -1,6 +1,6 @@
 import { Star, ArrowUpRight, Sparkles, Hand } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { Suspense, lazy } from 'react';
+import { Suspense, lazy, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { heroData } from '../mock';
 import { trackCtaClick } from '../lib/analytics';
@@ -18,18 +18,33 @@ const fadeUp = {
 
 export default function Hero() {
   const navigate = useNavigate();
+  const [load3D, setLoad3D] = useState(false);
+
+  useEffect(() => {
+    // Only load heavy 3D canvas when browser is idle to ensure instant TTI and 0 blocking time
+    if (typeof window !== 'undefined') {
+      if ('requestIdleCallback' in window) {
+        const id = window.requestIdleCallback(() => setLoad3D(true), { timeout: 3000 });
+        return () => window.cancelIdleCallback(id);
+      }
+      const timer = setTimeout(() => setLoad3D(true), 2500);
+      return () => clearTimeout(timer);
+    }
+  }, []);
 
   return (
     <section
       id="home"
       className="relative pt-32 pb-20 px-4 md:px-10 lg:px-16 overflow-hidden"
     >
-      {/* 3D scene layer — decorative, behind content */}
-      <div className="absolute inset-0 opacity-70 pointer-events-none">
-        <Suspense fallback={null}>
-          <HeroScene />
-        </Suspense>
-      </div>
+      {/* 3D scene layer — decorative, loaded when idle */}
+      {load3D && (
+        <div className="absolute inset-0 opacity-70 pointer-events-none">
+          <Suspense fallback={null}>
+            <HeroScene />
+          </Suspense>
+        </div>
+      )}
 
       {/* Soft radial glow */}
       <div
@@ -111,6 +126,8 @@ export default function Hero() {
               <img
                 src={heroData.portrait}
                 alt={heroData.name}
+                width="400"
+                height="400"
                 className="w-full h-full object-cover object-center"
                 loading="eager"
                 fetchpriority="high"
