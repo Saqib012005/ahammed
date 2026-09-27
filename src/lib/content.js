@@ -36,9 +36,20 @@ export function mediaUrl(value) {
 // Fetch one content collection. Throws on any non-OK response so React Query
 // can surface the error and we can fall back to mock data.
 async function fetchCollection(type) {
-  const res = await fetch(`${API_BASE}/content.php?type=${encodeURIComponent(type)}`, {
-    headers: { Accept: 'application/json' },
-  });
+  // Use a timestamp cache-buster and cache: 'no-store' so mobile browsers
+  // (iOS Safari, Android Chrome) and intermediate cellular proxies never serve
+  // stale cached JSON.
+  const res = await fetch(
+    `${API_BASE}/content.php?type=${encodeURIComponent(type)}&_t=${Date.now()}`,
+    {
+      cache: 'no-store',
+      headers: {
+        Accept: 'application/json',
+        'Cache-Control': 'no-cache',
+        Pragma: 'no-cache',
+      },
+    }
+  );
   if (!res.ok) {
     throw new Error(`Failed to load ${type} (${res.status})`);
   }
@@ -58,12 +69,15 @@ function collectionQuery(type, fallback) {
       try {
         return await fetchCollection(type);
       } catch (err) {
+        console.warn(`Failed to fetch live ${type} from API, using fallback:`, err);
         // API unavailable — use the bundled content so the site still renders.
         return fallback;
       }
     },
     placeholderData: fallback,
-    staleTime: 60_000,
+    staleTime: 5_000,
+    refetchOnMount: 'always',
+    refetchOnWindowFocus: true,
     retry: 1,
   };
 }

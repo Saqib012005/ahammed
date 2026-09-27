@@ -23,20 +23,31 @@
   RewriteRule ^ index.html [L]
 </IfModule>
 
-# Long-cache the hashed static assets; never cache index.html.
+# Long-cache the hashed static assets; never cache index.html or dynamic API endpoints.
 <IfModule mod_headers.c>
   <FilesMatch "\.(js|css|woff2?|png|jpe?g|gif|svg|webp|ico)$">
     Header set Cache-Control "public, max-age=31536000, immutable"
   </FilesMatch>
-  <FilesMatch "index\.html$">
-    Header set Cache-Control "no-cache, no-store, must-revalidate"
+  <FilesMatch "(index\.html|\.php)$">
+    Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
   </FilesMatch>
+  # Ensure all dynamic /api/ endpoints are never cached by browsers or carrier proxies
+  <If "%{REQUEST_URI} =~ m#^/api/(content|login|upload|set-password)\.php#">
+    Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+  </If>
 </IfModule>
 
 <IfModule mod_expires.c>
   ExpiresActive On
   ExpiresDefault "access plus 1 month"
   ExpiresByType text/html "access plus 0 seconds"
+  ExpiresByType application/json "access plus 0 seconds"
+  ExpiresByType text/x-php "access plus 0 seconds"
+  ExpiresByType application/x-httpd-php "access plus 0 seconds"
   ExpiresByType text/css "access plus 1 year"
   ExpiresByType application/javascript "access plus 1 year"
   ExpiresByType text/javascript "access plus 1 year"

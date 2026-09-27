@@ -95,9 +95,17 @@ export function logout() {
 
 // List a collection. When authed, blogs include unpublished drafts too.
 export async function list(type) {
-  const res = await fetch(`${API_BASE}/content.php?type=${encodeURIComponent(type)}`, {
-    headers: authHeaders({ Accept: 'application/json' }),
-  });
+  const res = await fetch(
+    `${API_BASE}/content.php?type=${encodeURIComponent(type)}&_t=${Date.now()}`,
+    {
+      cache: 'no-store',
+      headers: authHeaders({
+        Accept: 'application/json',
+        'Cache-Control': 'no-cache',
+        Pragma: 'no-cache',
+      }),
+    }
+  );
   const body = await parse(res);
   return Array.isArray(body) ? body : [];
 }
